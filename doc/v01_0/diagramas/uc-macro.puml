@@ -1,0 +1,31 @@
+@startuml uc-macro
+
+!include ./../_puml/defaults.puml
+
+title Diagrama de caso de uso macro\n
+
+actor "Usuário" as act_usuario <<sistema>>
+actor "Anunciante" as act_anunciante <<humano>>
+actor "Comprador" as act_comprador <<humano>>
+
+rectangle "Mau Classificado" as rec_mauClassificado <<sistema>> {
+    usecase "<$formatacaoIdCasoDeUso>UC001\nAnuncia seu produto" as uc001_anunciaSeuProduto
+    usecase "<$formatacaoIdCasoDeUso>UC002\nProcura um produto" as uc002_procuraUmProduto
+    usecase "<$formatacaoIdCasoDeUso>UC006\nIdentifica-se na plataforma" as uc006_identificaSeNaPlataforma
+    usecase "<$formatacaoIdCasoDeUso>UC003\nCompra o produto" as uc003_compraOProduto
+    usecase "<$formatacaoIdCasoDeUso>UC004\nCombina entrega" as uc004_combinaEntrega
+    usecase "<$formatacaoIdCasoDeUso>UC005\nAcompanha a entrega" as uc005_acompanhaAEntrega
+}
+
+act_usuario <|-- act_anunciante
+act_usuario <|-- act_comprador
+
+act_anunciante <|-- uc006_identificaSeNaPlataforma
+act_comprador <|-- uc006_identificaSeNaPlataforma
+act_comprador <|-- uc002_procuraUmProduto
+uc006_identificaSeNaPlataforma <|-- uc001_anunciaSeuProduto
+uc006_identificaSeNaPlataforma <|-- uc003_compraOProduto
+uc006_identificaSeNaPlataforma <|-- uc004_combinaEntrega
+uc004_combinaEntrega <|-- uc005_acompanhaAEntrega
+
+@enduml
